@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../doom.css"; // <--- deine Doom-Styles (siehe Schritt 2)
+import "../Doom.css"; // <--- deine Doom-Styles (siehe Schritt 2)
 
 export default function Home() {
   const [scrollEnergy, setScrollEnergy] = useState(0);
