@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ========================================= */
+/*  DARK STONER BACKGROUND (NICHT hässlich)  */
+/* ========================================= */
+
+.page-bg {
+  background: radial-gradient(circle at center,
+      #0a0011,
+      #14001e 40%,
+      #06000f 80%);
+  animation: bgMove 20s ease-in-out infinite alternate;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes bgMove {
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
+}
+
+/* Subtiler Nebel */
+.page-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.07;          /* statt 0.40 → wirkt 1000× cleaner */
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Leichte Rauchschwaden */
+.page-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://i.imgur.com/o7pZB5F.png");
+  opacity: 0.12;
+  animation: smokeMove 35s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes smokeMove {
+  0%   { transform: translateY(0px) scale(1.1); }
+  50%  { transform: translateY(-20px) scale(1.15); }
+  100% { transform: translateY(0px) scale(1.1); }
+}
+
+/* ========================================= */
+/*   SECTION TITLES                          */
+/* ========================================= */
+
+.doom-title {
+  font-size: 2.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(140, 40, 255, 0.6);
+  margin-bottom: 1rem;
+}
+
+/* Subtitle */
+.doom-sub {
+  opacity: 0.7;
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+}
+
+/* ========================================= */
+/*  PANELS (SHOWS, MUSIC, ETC.)              */
+/* ========================================= */
+
+.doom-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 25px;
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease;
+}
+
+.doom-panel:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 20px rgba(160, 70, 255, 0.25),
+    0 0 70px rgba(100, 0, 80, 0.25);
+  border-color: rgba(180, 40, 255, 0.4);
+}
+
+/* ========================================= */
+/*  MEDIA IMAGES                             */
+/* ========================================= */
+
+.doom-img {
+  border-radius: 10px;
+  filter: brightness(0.85);
+  transition: 0.3s ease;
+}
+
+.doom-img:hover {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+/* Floating effect */
+.float-slow {
+  animation: floatSlow 8s infinite ease-in-out;
+}
+
+@keyframes floatSlow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
