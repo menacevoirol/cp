@@ -1,95 +1,198 @@
 @import "tailwindcss";
 
-/* ========================================= */
-/*  DARK STONER BACKGROUND (NICHT hässlich)  */
-/* ========================================= */
+/* ================================================= */
+/* GLOBAL SITE STYLE */
+/* ================================================= */
 
-.page-bg {
-  background: radial-gradient(circle at center,
-      #0a0011,
-      #14001e 40%,
-      #06000f 80%);
-  animation: bgMove 20s ease-in-out infinite alternate;
-  position: relative;
-  overflow: hidden;
+.site-wrapper {
+  background: #000;
+  color: #e5e5e5;
+  font-family: "Inter", sans-serif;
 }
 
-@keyframes bgMove {
-  from { transform: scale(1); }
-  to   { transform: scale(1.05); }
+/* ================================================= */
+/* HEADER (professional metal style) */
+/* ================================================= */
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+
+  background: rgba(0,0,0,0.15);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-
-
-@keyframes smokeMove {
-  0%   { transform: translateY(0px) scale(1.1); }
-  50%  { transform: translateY(-20px) scale(1.15); }
-  100% { transform: translateY(0px) scale(1.1); }
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* ========================================= */
-/*   SECTION TITLES                          */
-/* ========================================= */
+.header-logo {
+  height: 26px;
+  opacity: 0.9;
+}
 
-.doom-title {
-  font-size: 2.5rem;
+.header-nav a {
+  margin-left: 32px;
+  font-size: 0.85rem;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
-  text-shadow: 0 0 12px rgba(140, 40, 255, 0.6);
-  margin-bottom: 1rem;
+  color: #fff;
+  opacity: 0.8;
+  transition: 0.2s;
 }
 
-/* Subtitle */
-.doom-sub {
-  opacity: 0.7;
-  font-size: 0.9rem;
-  letter-spacing: 0.25em;
+.header-nav a:hover {
+  opacity: 1;
 }
 
-/* ========================================= */
-/*  PANELS (SHOWS, MUSIC, ETC.)              */
-/* ========================================= */
+/* ================================================= */
+/* HERO SECTION */
+/* ================================================= */
 
-.doom-panel {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+.hero-section {
+  height: 100vh;
+  background-image: url("/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* parallax controlled by JS */
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.75)
+  );
+}
+
+.hero-content {
+  position: relative;
+  top: 40%;
+  transform: translateY(-40%);
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  color: white;
+  margin-bottom: 10px;
+
+  text-shadow:
+    0 0 30px rgba(255,255,255,0.2);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: #bbbbbb;
+}
+
+/* ================================================= */
+/* SECTIONS */
+/* ================================================= */
+
+.section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+}
+
+.section-text {
+  font-size: 1.2rem;
+  opacity: 0.85;
+  line-height: 1.7;
+}
+
+/* ================================================= */
+/* SHOWS */
+/* ================================================= */
+
+.show-card {
+  background: #111;
   padding: 25px;
-  backdrop-filter: blur(8px);
-  transition: 0.3s ease;
+  margin: 25px 0;
+  border: 1px solid #222;
+  transition: 0.25s;
 }
 
-.doom-panel:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 0 20px rgba(160, 70, 255, 0.25),
-    0 0 70px rgba(100, 0, 80, 0.25);
-  border-color: rgba(180, 40, 255, 0.4);
+.show-card:hover {
+  border-color: #fff;
 }
 
-/* ========================================= */
-/*  MEDIA IMAGES                             */
-/* ========================================= */
+.show-date {
+  opacity: 0.6;
+}
 
-.doom-img {
-  border-radius: 10px;
+.show-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* ================================================= */
+/* GALLERY */
+/* ================================================= */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
   filter: brightness(0.85);
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
-.doom-img:hover {
-  filter: brightness(1.15);
-  transform: scale(1.03);
+.gallery img:hover {
+  filter: brightness(1.1);
 }
 
-/* Floating effect */
-.float-slow {
-  animation: floatSlow 8s infinite ease-in-out;
+/* ================================================= */
+/* FOOTER */
+/* ================================================= */
+
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  opacity: 0.4;
 }
 
-@keyframes floatSlow {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-  100% { transform: translateY(0px); }
+/* ================================================= */
+/* FADE-IN */
+/* ================================================= */
+
+.fade-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 1s ease;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
