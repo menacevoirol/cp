@@ -1,39 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../Doom.css";
 
 export default function Home() {
 
-  // Smooth Parallax
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setOffset(window.scrollY * 0.35);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Fade-in on scroll
   useEffect(() => {
     const sections = document.querySelectorAll(".fade-section");
-
-    const obs = new IntersectionObserver(
-      entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) e.target.classList.add("visible");
-        });
-      },
-      { threshold: 0.2 }
-    );
-
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      });
+    }, { threshold: 0.2 });
     sections.forEach(sec => obs.observe(sec));
   }, []);
 
   return (
     <div className="site-wrapper">
 
-      {/* ======================================== */}
-      {/* HEADER */}
-      {/* ======================================== */}
+      {/* ==================== HEADER ==================== */}
       <nav className="main-header">
         <div className="header-inner">
           <img src="/logo.png" className="header-logo" alt="Logo" />
@@ -48,13 +31,8 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* ======================================== */}
-      {/* HERO */}
-      {/* ======================================== */}
-      <header
-        className="hero-section fade-section"
-        style={{ backgroundPositionY: `-${offset}px` }}
-      >
+      {/* ==================== HERO ==================== */}
+      <header className="hero-section fade-section">
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
@@ -63,20 +41,15 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ======================================== */}
-      {/* ABOUT */}
-      {/* ======================================== */}
+      {/* ==================== ABOUT ==================== */}
       <section id="about" className="section fade-section">
         <h2 className="section-title">ABOUT</h2>
         <p className="section-text">
           Cable Pullers forge heavy riffs, hypnotic grooves and atmospheric doom energy.
-          A modern stoner sound carried by weight, tone and darkness.
         </p>
       </section>
 
-      {/* ======================================== */}
-      {/* MUSIC */}
-      {/* ======================================== */}
+      {/* ==================== MUSIC ==================== */}
       <section id="music" className="section fade-section">
         <h2 className="section-title">MUSIC</h2>
         <iframe
@@ -88,30 +61,22 @@ export default function Home() {
         />
       </section>
 
-      {/* ======================================== */}
-      {/* SHOWS */}
-      {/* ======================================== */}
+      {/* ==================== SHOWS ==================== */}
       <section id="shows" className="section fade-section">
         <h2 className="section-title">SHOWS</h2>
-
         <div className="show-card">
           <p className="show-date">April 6, 2025 — Bern</p>
           <p className="show-name">Stoner Ritual Night</p>
         </div>
-
         <div className="show-card">
           <p className="show-date">May 12, 2025 — Zürich, Dynamo</p>
           <p className="show-name">Doom Over Zürich</p>
         </div>
-
       </section>
 
-      {/* ======================================== */}
-      {/* MEDIA */}
-      {/* ======================================== */}
+      {/* ==================== GALLERY ==================== */}
       <section id="media" className="section fade-section">
         <h2 className="section-title">MEDIA</h2>
-
         <div className="gallery">
           <img src="/gallery1.jpg" />
           <img src="/gallery2.jpg" />
@@ -119,9 +84,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ======================================== */}
-      {/* FOOTER */}
-      {/* ======================================== */}
+      {/* ==================== FOOTER ==================== */}
       <footer className="footer">
         © 2025 Cable Pullers
       </footer>

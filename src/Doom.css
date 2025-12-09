@@ -1,18 +1,15 @@
 @import "tailwindcss";
 
-/* ================================================= */
-/* GLOBAL SITE STYLE */
-/* ================================================= */
-
+/* GLOBAL RESET */
 .site-wrapper {
   background: #000;
-  color: #e5e5e5;
-  font-family: "Inter", sans-serif;
+  color: #e6e6e6;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ================================================= */
-/* HEADER (professional metal style) */
-/* ================================================= */
+/* ============================= */
+/* HEADER */
+/* ============================= */
 
 .main-header {
   position: fixed;
@@ -21,8 +18,8 @@
   width: 100%;
   z-index: 50;
 
-  background: rgba(0,0,0,0.15);
-  backdrop-filter: blur(12px);
+  background: rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -53,18 +50,15 @@
   opacity: 1;
 }
 
-/* ================================================= */
-/* HERO SECTION */
-/* ================================================= */
+/* ============================= */
+/* HERO */
+/* ============================= */
 
 .hero-section {
   height: 100vh;
-  background-image: url("/background.png");
+  background-image: url("/hero.jpg"); /* <-- DU lädst dein Hero-Bild hoch */
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-
-  /* parallax controlled by JS */
   position: relative;
 }
 
@@ -88,7 +82,7 @@
   font-size: 5rem;
   font-weight: 900;
   letter-spacing: 0.15em;
-  color: white;
+  color: #ffffff;
   margin-bottom: 10px;
 
   text-shadow:
@@ -98,12 +92,12 @@
 .hero-sub {
   font-size: 1rem;
   letter-spacing: 0.3em;
-  color: #bbbbbb;
+  color: #d1d1d1;
 }
 
-/* ================================================= */
+/* ============================= */
 /* SECTIONS */
-/* ================================================= */
+/* ============================= */
 
 .section {
   max-width: 900px;
@@ -121,13 +115,13 @@
 
 .section-text {
   font-size: 1.2rem;
-  opacity: 0.85;
+  opacity: 0.8;
   line-height: 1.7;
 }
 
-/* ================================================= */
+/* ============================= */
 /* SHOWS */
-/* ================================================= */
+/* ============================= */
 
 .show-card {
   background: #111;
@@ -150,9 +144,9 @@
   font-weight: bold;
 }
 
-/* ================================================= */
+/* ============================= */
 /* GALLERY */
-/* ================================================= */
+/* ============================= */
 
 .gallery {
   display: grid;
@@ -172,9 +166,9 @@
   filter: brightness(1.1);
 }
 
-/* ================================================= */
+/* ============================= */
 /* FOOTER */
-/* ================================================= */
+/* ============================= */
 
 .footer {
   text-align: center;
@@ -182,9 +176,9 @@
   opacity: 0.4;
 }
 
-/* ================================================= */
+/* ============================= */
 /* FADE-IN */
-/* ================================================= */
+/* ============================= */
 
 .fade-section {
   opacity: 0;
