@@ -190,3 +190,37 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/* GLOBAL FIX: verhindert horizontales Scrollen */
+html, body {
+  overflow-x: hidden;
+}
+
+/* MOBILE HERO FIX */
+@media (max-width: 768px) {
+  .hero-section {
+    height: 100svh !important; /* echtes viewport height */
+    background-attachment: scroll !important; /* parallax off */
+    background-position: center !important;
+  }
+
+  .hero-title {
+    font-size: 2.8rem !important;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  .header-inner {
+    padding: 14px 20px;
+  }
+
+  .header-nav a {
+    margin-left: 18px;
+    font-size: 0.7rem;
+  }
+}
