@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Fog from "./components/Fog";
-import DoomPedalMK4 from "./components/DoomPedalMK4";
+import RitualPedal from "./components/RitualPedal";
 import EnterSequence from "./components/EnterSequence"; 
 import NoiseOverlay from "./components/NoiseOverlay";
 import TransitionOverlay from "./components/TransitionOverlay";
@@ -27,7 +27,7 @@ export default function App() {
 
       {/* 🎮 Doom Pedal Spiel */}
       {showPedal && (
-        <DoomPedalMK4
+        <RitualPedal
           onComplete={() => {
             setShowPedal(false);
             setStartSequence(true);
@@ -52,10 +52,6 @@ export default function App() {
             className="w-[260px] md:w-[380px] mx-auto select-none"
             alt="Logo"
           />
-
-          <p className="text-gray-400 text-lg mt-4 tracking-wide">
-            Dark Groove // Heavy Atmosphere
-          </p>
 
           <button
             onClick={handleEnter}
