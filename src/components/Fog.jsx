@@ -8,9 +8,7 @@ export default function Fog() {
         playsInline
         className="w-full h-full object-cover opacity-40"
       >
-        <source src="/fog.mp4" type="video/mp4"/>
-
-
+        <source src="/fog.mp4" type="video/mp4" />
       </video>
     </div>
   );

@@ -1,226 +1,285 @@
 @import "tailwindcss";
 
-/* GLOBAL RESET */
-.site-wrapper {
-  background: #000;
+/* ========================================= */
+/* GLOBAL */
+/* ========================================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #050506;
   color: #e6e6e6;
-  font-family: 'Inter', sans-serif;
+  font-family: "IM Fell English SCl Decorative", serif;
 }
 
-/* ============================= */
-/* HEADER */
-/* ============================= */
+.site-wrapper {
+  position: relative;
+  padding-top: 100vh; /* <-- Das ist der Platz für den fixen Hero */
+  z-index: 2;
+}
 
-.main-header {
+/* ========================================= */
+/* HEADER */
+/* ========================================= */
+
+.mega-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 50;
+  z-index: 80;
 
-  background: rgba(0,0,0,0.2);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+  padding: 20px 50px;
 
-.header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 18px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.header-logo {
-  height: 26px;
-  opacity: 0.9;
+.mega-center {
+  display: flex;
+  align-items: center;
+  gap: 45px;
 }
 
-.header-nav a {
-  margin-left: 32px;
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
-  color: #fff;
-  opacity: 0.8;
-  transition: 0.2s;
+.mega-sigil {
+  height: 64px;
+  filter: drop-shadow(0 0 14px rgba(150, 60, 255, 0.55));
 }
 
-.header-nav a:hover {
-  opacity: 1;
+.mega-nav {
+  display: flex;
+  gap: 40px;
 }
 
-/* ============================= */
-/* HERO */
-/* ============================= */
+.mega-nav a {
+  font-family: "Cinzel Decorative", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
 
-.hero-section {
-  height: 100vh;
-  background-image: url("/hero.jpg"); /* <-- DU lädst dein Hero-Bild hoch */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    rgba(0,0,0,0.6),
-    rgba(0,0,0,0.75)
-  );
-}
-
-.hero-content {
-  position: relative;
-  top: 40%;
-  transform: translateY(-40%);
-  text-align: center;
-}
-
-.hero-title {
-  font-size: 5rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  color: #ffffff;
-  margin-bottom: 10px;
-
-  text-shadow:
-    0 0 30px rgba(255,255,255,0.2);
-}
-
-.hero-sub {
-  font-size: 1rem;
-  letter-spacing: 0.3em;
-  color: #d1d1d1;
-}
-
-/* ============================= */
-/* SECTIONS */
-/* ============================= */
-
-.section {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 120px 20px;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  margin-bottom: 20px;
-}
-
-.section-text {
-  font-size: 1.2rem;
-  opacity: 0.8;
-  line-height: 1.7;
-}
-
-/* ============================= */
-/* SHOWS */
-/* ============================= */
-
-.show-card {
-  background: #111;
-  padding: 25px;
-  margin: 25px 0;
-  border: 1px solid #222;
+  color: #e5e5e5;
+  opacity: 0.75;
   transition: 0.25s;
 }
 
+.mega-nav a:hover {
+  opacity: 1;
+  color: #c084fc;
+}
+
+/* ========================================= */
+/* HERO */
+/* ========================================= */
+
+.hero-section {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+
+  background-color: #101014;
+  pointer-events: none; /* NICHT klickbar */
+}
+
+.hero-svg-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.hero-svg {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 60%;
+  height: auto;
+
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  opacity: 5%;
+}
+
+.hero-content.hidden {
+  opacity: 0;
+  transform: translate(-50%, -40%) scale(0.92);
+}
+
+.hero-title {
+  font-family: "Inter", sans-serif;
+  font-size: 4.2rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+
+  color: #e9e3ff;
+  text-shadow: 0 0 18px rgba(160, 70, 255, 0.45),
+    0 0 40px rgba(120, 0, 160, 0.35);
+
+  animation: heroReveal 2.4s ease forwards;
+  opacity: 0;
+}
+
+.hero-sub {
+  margin-top: 14px;
+
+  font-size: 0.9rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  opacity: 0.75;
+
+  color: #d8cfff;
+  text-shadow: 0 0 8px rgba(140, 60, 255, 0.3);
+
+  animation: heroReveal 2.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes heroReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================= */
+/* SECTIONS — NORMAL SCROLL */
+/* ========================================= */
+
+.section {
+  min-height: 100vh; /* NICHT FIXED */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 80px; /* Platz wegen Header */
+  position: relative;
+  z-index: 5;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========================================= */
+/* SHOW CARDS */
+/* ========================================= */
+
+.show-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 28px;
+  margin: 30px 0;
+  border-radius: 10px;
+
+  transition: 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
 .show-card:hover {
-  border-color: #fff;
+  border-color: #c084fc;
+  box-shadow: 0 0 18px rgba(160, 70, 255, 0.25);
 }
 
 .show-date {
   opacity: 0.6;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
 }
 
 .show-name {
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.35rem;
+  font-weight: 700;
 }
 
-/* ============================= */
+/* ========================================= */
 /* GALLERY */
-/* ============================= */
+/* ========================================= */
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
 }
 
 .gallery img {
   width: 100%;
   height: 260px;
   object-fit: cover;
-  filter: brightness(0.85);
-  transition: 0.3s;
+
+  border-radius: 8px;
+  filter: brightness(0.8);
+  transition: 0.3s ease;
 }
 
 .gallery img:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.12) contrast(1.1);
+  transform: scale(1.04);
 }
 
-/* ============================= */
+/* ========================================= */
 /* FOOTER */
-/* ============================= */
+/* ========================================= */
 
 .footer {
   text-align: center;
-  padding: 40px 0;
+  padding: 50px 0;
   opacity: 0.4;
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
 }
 
-/* ============================= */
-/* FADE-IN */
-/* ============================= */
+/* ========================================= */
+/* MOBILE */
+/* ========================================= */
 
-.fade-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 1s ease;
-}
-
-.fade-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* GLOBAL FIX: verhindert horizontales Scrollen */
-html, body {
-  overflow-x: hidden;
-}
-
-/* MOBILE HERO FIX */
 @media (max-width: 768px) {
-  .hero-section {
-    height: 100svh !important; /* echtes viewport height */
-    background-attachment: scroll !important; /* parallax off */
-    background-position: center !important;
-  }
-
   .hero-title {
-    font-size: 2.8rem !important;
-    letter-spacing: 0.1em;
+    font-size: 3rem;
   }
-
-  .hero-sub {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-  }
-
-  .header-inner {
+  .mega-header {
     padding: 14px 20px;
   }
-
-  .header-nav a {
-    margin-left: 18px;
+  .mega-nav {
+    gap: 20px;
+  }
+  .mega-nav a {
     font-size: 0.7rem;
   }
 }

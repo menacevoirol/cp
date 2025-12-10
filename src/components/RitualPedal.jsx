@@ -12,9 +12,7 @@ export default function RitualPedal({ onComplete }) {
 
   return (
     <div className="pedal-wrapper">
-
       <div className="pedal-box">
-
         {/* Schrauben */}
         <div className="screw s1"></div>
         <div className="screw s2"></div>
@@ -22,9 +20,7 @@ export default function RitualPedal({ onComplete }) {
         <div className="screw s4"></div>
 
         {/* Titel */}
-        <h1 className="pedal-title">
-          CABLE PULLERS
-        </h1>
+        <h1 className="pedal-title">CABLE PULLERS</h1>
 
         {/* Fader */}
         <div className="fader-wrapper">
@@ -41,7 +37,6 @@ export default function RitualPedal({ onComplete }) {
 
           <div className={`led ${value >= 80 ? "on" : ""}`}></div>
         </div>
-
       </div>
     </div>
   );

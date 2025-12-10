@@ -15,17 +15,13 @@
   width: 320px;
   height: 500px;
 
-  background:
-    radial-gradient(circle at 50% 10%, #1b0000 0%, transparent 40%),
+  background: radial-gradient(circle at 50% 10%, #1b0000 0%, transparent 40%),
     linear-gradient(145deg, #0a0a0a, #000);
 
   border-radius: 14px;
 
   border: 2px solid #2a0000;
-  box-shadow:
-    inset 0 0 70px #0a0000,
-    inset 0 0 20px #190000,
-    0 0 40px #ff000033,
+  box-shadow: inset 0 0 70px #0a0000, inset 0 0 20px #190000, 0 0 40px #ff000033,
     0 0 120px #200000aa;
 
   display: flex;
@@ -41,32 +37,43 @@
   border-radius: 50%;
   position: absolute;
 
-  background:
-    radial-gradient(circle at 50% 40%, #777, #444 40%, #222 70%, #000 100%),
+  background: radial-gradient(
+      circle at 50% 40%,
+      #777,
+      #444 40%,
+      #222 70%,
+      #000 100%
+    ),
     linear-gradient(145deg, #555, #222);
 
-  box-shadow:
-    inset 0 0 4px #000,
-    inset -1px 1px 3px #999,
-    0 0 6px #000;
+  box-shadow: inset 0 0 4px #000, inset -1px 1px 3px #999, 0 0 6px #000;
 }
 
-.s1 { top: 14px; left: 14px; }
-.s2 { top: 14px; right: 14px; }
-.s3 { bottom: 14px; left: 14px; }
-.s4 { bottom: 14px; right: 14px; }
+.s1 {
+  top: 14px;
+  left: 14px;
+}
+.s2 {
+  top: 14px;
+  right: 14px;
+}
+.s3 {
+  bottom: 14px;
+  left: 14px;
+}
+.s4 {
+  bottom: 14px;
+  right: 14px;
+}
 
 /* TITLE – OCCULT TYPOGRAPHY */
 .pedal-title {
-  font-family: 'New Rocker', cursive;
+  font-family: "New Rocker", cursive;
   font-size: 2rem;
   color: #cc0000;
   letter-spacing: 2px;
 
-  text-shadow:
-    0 0 6px #ff0000,
-    0 0 14px #590000,
-    0 0 25px #ff2222aa;
+  text-shadow: 0 0 6px #ff0000, 0 0 14px #590000, 0 0 25px #ff2222aa;
 
   line-height: 1.1;
 }
@@ -92,17 +99,9 @@
   height: 280px;
   border-radius: 10px;
 
-  background: linear-gradient(
-    to bottom,
-    #2a0000,
-    #150000 40%,
-    #080000 100%
-  );
+  background: linear-gradient(to bottom, #2a0000, #150000 40%, #080000 100%);
 
-  box-shadow:
-    inset 0 0 16px #000,
-    inset 0 0 35px #220000aa,
-    0 0 14px #ff000044;
+  box-shadow: inset 0 0 16px #000, inset 0 0 35px #220000aa, 0 0 14px #ff000044;
 
   z-index: 1;
 }
@@ -118,8 +117,8 @@
 
   transform: translate(-50%, -50%) rotate(-90deg);
 
-  width: 280px;   /* becomes vertical height */
-  height: 40px;   /* becomes horizontal width */
+  width: 280px; /* becomes vertical height */
+  height: 40px; /* becomes horizontal width */
 
   background: transparent;
   cursor: grab;
@@ -138,17 +137,13 @@
   width: 38px;
   height: 34px;
 
-  background:
-    radial-gradient(circle at 30% 30%, #ff4444, #900000),
+  background: radial-gradient(circle at 30% 30%, #ff4444, #900000),
     linear-gradient(145deg, #ff0000, #660000);
 
   border: 2px solid #330000;
   border-radius: 6px;
 
-  box-shadow:
-    inset 0 0 12px #300000,
-    0 0 20px #ff000099,
-    0 0 40px #ff222277;
+  box-shadow: inset 0 0 12px #300000, 0 0 20px #ff000099, 0 0 40px #ff222277;
 
   cursor: grab;
 }
@@ -168,16 +163,17 @@
 
 .led.on {
   background: #ff0000;
-  box-shadow:
-    0 0 12px #ff0000,
-    0 0 25px #e80000,
-    0 0 45px #ff3333aa,
+  box-shadow: 0 0 12px #ff0000, 0 0 25px #e80000, 0 0 45px #ff3333aa,
     inset 0 0 6px #ffffff99;
 
   animation: ledPulse 0.8s infinite alternate;
 }
 
 @keyframes ledPulse {
-  0% { box-shadow: 0 0 18px #ff000077; }
-  100% { box-shadow: 0 0 40px #ff0000; }
+  0% {
+    box-shadow: 0 0 18px #ff000077;
+  }
+  100% {
+    box-shadow: 0 0 40px #ff0000;
+  }
 }

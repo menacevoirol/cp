@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Fog from "./components/Fog";
 import RitualPedal from "./components/RitualPedal";
-import EnterSequence from "./components/EnterSequence"; 
+import EnterSequence from "./components/EnterSequence";
 import NoiseOverlay from "./components/NoiseOverlay";
 import TransitionOverlay from "./components/TransitionOverlay";
 
@@ -13,19 +13,12 @@ export default function App() {
   const navigate = useNavigate();
 
   const handleEnter = () => {
-    setShowPedal(true); 
+    setShowPedal(true);
   };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-
-      {/* 🚀 Shader-Sequenz */}
-      <EnterSequence
-        active={startSequence}
-        onFinish={() => navigate("/home")}
-      />
-
-      {/* 🎮 Doom Pedal Spiel */}
+      {/* 🎮 Doom Pedal */}
       {showPedal && (
         <RitualPedal
           onComplete={() => {
@@ -35,16 +28,14 @@ export default function App() {
         />
       )}
 
-      {/* 🔥 Hintergrund-Video */}
+      {/* Hintergrund-Effekte */}
       <Fog />
-
-      {/* 🔥 Film Grain */}
       <NoiseOverlay />
 
-      {/* Optional */}
+      {/* Fade-to-black bei Start */}
       <TransitionOverlay active={startSequence} />
 
-      {/* Landing Page Content */}
+      {/* Landing Page */}
       {!showPedal && !startSequence && (
         <main className="text-center animate-fadeIn z-20 px-4">
           <img
@@ -62,6 +53,12 @@ export default function App() {
           </button>
         </main>
       )}
+
+      {/* Enter Sequence GANZ OBEN! */}
+      <EnterSequence
+        active={startSequence}
+        onFinish={() => navigate("/home")}
+      />
     </div>
   );
 }

@@ -1,8 +1,7 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { EffectComposer, Noise, Glitch, Vignette } from "@react-three/postprocessing";
-import { BlendFunction, GlitchMode } from "postprocessing";
-import { motion } from "framer-motion";
+import { Canvas, useFrame, extend } from "@react-three/fiber";
 import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { ShaderMaterial } from "three";
 
 export default function EnterSequence({ active, onFinish }) {
   if (!active) return null;
@@ -11,120 +10,124 @@ export default function EnterSequence({ active, onFinish }) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 pointer-events-none"
+      transition={{ duration: 0.4 }}
+      className="fixed inset-0 z-[9999] pointer-events-none bg-black"
+      style={{ isolation: "isolate" }}
     >
-      {/* WebGL Shader Canvas */}
-      <Canvas>
-        <MeltdownShader />
-        <Effects onFinish={onFinish} />
+      {/* DARK SMOKE VORTEX */}
+      <Canvas
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+        gl={{ alpha: true }}
+      >
+        <SmokeVortex />
       </Canvas>
 
-      {/* Weißer Flash am Ende */}
+      {/* Fade to black after animation */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.2 }}
-        className="absolute inset-0 bg-white"
+        transition={{ delay: 2.8, duration: 1.2 }}
+        className="absolute inset-0 bg-black z-10"
       />
+
+      <FinishTimer delay={4000} onFinish={onFinish} />
     </motion.div>
   );
 }
 
-/* -----------------------------------
-   MELTDOWN SHADER (wavy distortion)
--------------------------------------*/
+function FinishTimer({ onFinish, delay }) {
+  useEffect(() => {
+    const t = setTimeout(() => onFinish(), delay);
+    return () => clearTimeout(t);
+  }, []);
+  return null;
+}
 
-function MeltdownShader() {
+/* -------------------------------
+   DARK SMOKE + VORTEX SHADER
+-------------------------------- */
+
+function SmokeVortex() {
   const mesh = useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    mesh.current.material.distortion = Math.sin(t * 3) * 0.2;
-    mesh.current.material.distortion2 = Math.sin(t * 1.2) * 0.15;
+    mesh.current.material.uniforms.time.value = clock.getElapsedTime();
   });
 
   return (
     <mesh ref={mesh}>
-      <planeGeometry args={[2, 2]} />
-      <meltdownMaterial />
+      <planeGeometry args={[4, 4]} />
+      <smokeVortexMaterial />
     </mesh>
   );
 }
 
-/* -----------------------------------
-   POSTPROCESSING (noise + glitch)
--------------------------------------*/
-
-function Effects({ onFinish }) {
-  useEffect(() => {
-    const timeout = setTimeout(() => onFinish(), 1600); // After animation → navigate
-    return () => clearTimeout(timeout);
-  }, []);
-
-  return (
-    <EffectComposer>
-      {/* Noise */}
-      <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} />
-
-      {/* Glitch Phase */}
-      <Glitch
-        delay={[0.3, 0.6]}
-        duration={[0.2, 0.6]}
-        strength={[0.2, 0.5]}
-        mode={GlitchMode.CONSTANT_WILD}
-        active
-      />
-
-      {/* Doom Vignette */}
-      <Vignette eskil={false} offset={0.4} darkness={1.2} />
-    </EffectComposer>
-  );
-}
-
-/* -----------------------------------
-   CUSTOM MELTDOWN MATERIAL
--------------------------------------*/
-
-import { ShaderMaterial } from "three";
-import { extend } from "@react-three/fiber";
-
-class MeltdownMaterialImpl extends ShaderMaterial {
+class SmokeVortexMaterialImpl extends ShaderMaterial {
   constructor() {
     super({
-      uniforms: {
-        time: { value: 0 },
-      },
+      uniforms: { time: { value: 0 } },
       vertexShader: `
         varying vec2 vUv;
-        uniform float time;
-
         void main() {
           vUv = uv;
-
-          vec3 pos = position;
-
-          // Meltdown distortion
-          pos.y += sin(uv.x * 10.0 + time * 5.0) * 0.15;
-          pos.x += sin(uv.y * 6.0 + time * 3.0) * 0.10;
-
-          gl_Position = vec4(pos, 1.0);
+          gl_Position = vec4(position, 1.0);
         }
       `,
       fragmentShader: `
         varying vec2 vUv;
+        uniform float time;
+
+        // Simple psuedo noise
+        float hash(vec2 p) {
+          return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453123);
+        }
+
+        float noise(vec2 p) {
+          vec2 i = floor(p);
+          vec2 f = fract(p);
+          float a = hash(i);
+          float b = hash(i + vec2(1.0, 0.0));
+          float c = hash(i + vec2(0.0, 1.0));
+          float d = hash(i + vec2(1.0, 1.0));
+          vec2 u = f*f*(3.0-2.0*f);
+          return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+        }
 
         void main() {
-          // Psychedelic doom palette
-          float r = 0.2 + 0.2 * sin(vUv.x * 20.0);
-          float g = 0.1 + 0.2 * sin(vUv.y * 15.0);
-          float b = 0.25 + 0.3 * sin(vUv.x * 10.0 + vUv.y * 10.0);
+          vec2 uv = vUv - 0.5;
+          float t = time * 0.3;
 
-          gl_FragColor = vec4(r, g, b, 1.0);
+          // Rotating vortex coordinate
+          float angle = atan(uv.y, uv.x);
+          float radius = length(uv);
+
+          angle += t * 0.4;
+          vec2 vortexUV = vec2(
+            cos(angle) * radius,
+            sin(angle) * radius
+          );
+
+          float smoke = noise(vortexUV * 4.0 + t);
+          smoke += noise(vortexUV * 8.0 - t * 0.7) * 0.5;
+
+          smoke *= smoothstep(0.8, 0.2, radius);
+
+          vec3 col = mix(
+            vec3(0.0, 0.0, 0.0),
+            vec3(0.15, 0.1, 0.2),
+            smoke
+          );
+
+          gl_FragColor = vec4(col, 0.95);
         }
       `,
     });
   }
 }
 
-extend({ MeltdownMaterial: MeltdownMaterialImpl });
+extend({ SmokeVortexMaterial: SmokeVortexMaterialImpl });
