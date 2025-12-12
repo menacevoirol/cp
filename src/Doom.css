@@ -314,13 +314,18 @@ body {
 /* ========================================= */
 
 .footer {
+  /* Setzt die neue, volle Breite und zentriert den Inhalt (Text) */
+  width: 100%;
   text-align: center;
-  padding: 50px 50px;
+  padding: 20rem;
   opacity: 1;
   letter-spacing: 0.25em;
-  font-size: 10rem;
-  background-color: #050506;
+  font-size: rem;
+  background-color: #ffffff;
   z-index: 55;
+
+  /* display: flex; (vom Benutzer gewünscht) entfernt, um text-align: center zu ermöglichen */
+  /* Die Eigenschaft display: flex ist für eine einzelne Textzeile hier unnötig und verhindert die Zentrierung per text-align. */
 }
 
 /* ========================================= */

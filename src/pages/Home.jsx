@@ -104,7 +104,6 @@ export default function Home() {
           <img src="/gallery3.jpg" alt="Gallery Image 3" />
         </div>
       </section>
-      <footer className="footer">© 2025 Cable Pullers - In Eternal Doom</footer>
     </div>
   );
 }

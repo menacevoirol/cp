@@ -4,7 +4,6 @@ import BackgroundEffects from "./components/BackgroundEffects";
 export default function App() {
   return (
     <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Hintergrund-Effekte: Fixed BG-Image, Fog, Noise */}
       <BackgroundEffects />
 
       {/* GLOBAL HEADER */}
@@ -31,11 +30,9 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Hier rendert der Inhalt der Route (Home oder Game) */}
+      <main className="flex-grow"></main>
+      {/* <Outlet />Hier rendert der Inhalt der Route (Home oder Game) */}
       <Outlet />
-
-      {/* GLOBAL FOOTER */}
-      <footer className="footer">© 2025 Cable Pullers - In Eternal Doom</footer>
     </div>
   );
 }

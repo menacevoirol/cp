@@ -7,14 +7,7 @@ export default function BackgroundEffects() {
   return (
     <>
       {/* Das Fixed BG-Image mit sehr geringer Deckkraft */}
-      <div
-        className="fixed inset-0 z-0 opacity-20"
-        style={{
-          backgroundImage: `url("/background.jpg")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
+
       <Fog />
       <NoiseOverlay />
     </>
