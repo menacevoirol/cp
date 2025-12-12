@@ -1,9 +1,11 @@
+// menacevoirol/cp/cp-a629b105ec39860fb755a0bb35213c72721b92bc/src/pages/Home.jsx
 import { useEffect } from "react";
-import hero from "../assets/hero.svg";
+import { Link } from "react-router-dom";
+import heroSVG from "../assets/hero.svg";
 import "../Doom.css";
 
 export default function Home() {
-  // Nur Fade-In, kein Fullpage Scroll mehr
+  // Intersection Observer Logic zur Sektion-Sichtbarkeit beibehalten
   useEffect(() => {
     const sections = document.querySelectorAll(".fade-section");
     const obs = new IntersectionObserver(
@@ -14,110 +16,95 @@ export default function Home() {
       },
       { threshold: 0.2 }
     );
-
     sections.forEach((sec) => obs.observe(sec));
-  }, []);
 
-  useEffect(() => {
-    const titleContainer = document.querySelector(".hero-content");
-    const heroSection = document.querySelector(".hero-section");
-
-    if (!titleContainer || !heroSection) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-
-        if (!entry.isIntersecting) {
-          titleContainer.classList.add("hidden");
-        } else {
-          titleContainer.classList.remove("hidden");
-        }
-      },
-      {
-        threshold: 0.4, // 40% der Hero-Sektion sichtbar = sichtbar
-      }
-    );
-
-    observer.observe(heroSection);
-
-    return () => observer.disconnect();
+    // Cleanup
+    return () => sections.forEach((sec) => obs.unobserve(sec));
   }, []);
 
   return (
-    <div className="site-wrapper">
-      {/* HEADER */}
-      <nav className="mega-header">
-        <div className="mega-left"></div>
-
-        <div className="mega-center">
-          <div className="mega-nav">
-            <a href="#shows">SHOWS</a>
-            <a href="#music">MUSIC</a>
-            <a href="#about">ABOUT</a>
-          </div>
-
-          <img src="/logo.png" className="mega-sigil" alt="Logo" />
-
-          <div className="mega-nav">
-            <a href="#media">MEDIA</a>
-            <a href="#merch">MERCH</a>
-            <a href="#contact">CONTACT</a>
-          </div>
-        </div>
-
-        <div className="mega-right"></div>
-      </nav>
-
-      {/* HERO */}
+    <div className="site-wrapper has-hero">
+      {" "}
+      {/* WICHTIG: KLASSE HINZUGEFÜGT */}
+      {/* HEADER ENTFERNT (Jetzt in App.jsx) */}
+      {/* HERO SECTION - Fixed 100vh Parallax Hintergrund */}
       <header className="hero-section">
         <div className="hero-svg-wrapper">
-          <img src={hero} className="hero-svg" alt="background" />
+          <img src={heroSVG} className="hero-svg" alt="Abstract Background" />
         </div>
 
-        <div className="hero-overlay"></div>
-
-        <div className="hero-content">
-          <h1 className="hero-title">CABLE PULLERS</h1>
+        {/* NEU: Scroll Hint */}
+        <div className="scroll-hint">
+          <p>SCROLL TO DESCEND</p>
+          <div className="scroll-arrow">↓</div>
         </div>
       </header>
-
-      {/* CONTENT SECTIONS */}
-      <section id="about" className="section fade-section">
-        <h2 className="section-title">ABOUT</h2>
-        <p className="section-text">
-          Heavy riffs, hypnotic grooves and atmospheric doom energy.
+      {/* CONTENT SECTIONS - Scrollen unter dem Hero */}
+      <section
+        id="about"
+        className="section fade-section max-w-4xl mx-auto px-4"
+      >
+        <h2 className="section-title text-3xl font-bold mb-8 uppercase text-purple-300 tracking-widest">
+          About the Ritual
+        </h2>
+        <p className="section-text text-lg leading-relaxed text-gray-400">
+          Cable Pullers zelebrieren den dunklen Riff-Kult. Heavy Riffs,
+          hypnotische Grooves und atmosphärische Doom-Energie vereinen sich zu
+          einem überwältigenden Hörerlebnis. Willkommen in der Leere.
         </p>
       </section>
-
-      <section id="music" className="section fade-section">
-        <h2 className="section-title">MUSIC</h2>
-        <iframe
-          className="music-embed"
-          src="https://open.spotify.com/embed/artist/3BmG8pTz6PvxI6fN5EZe7C"
-          width="100%"
-          height="380"
-        />
-      </section>
-
-      <section id="shows" className="section fade-section">
-        <h2 className="section-title">SHOWS</h2>
-        <div className="show-card">
-          <p className="show-date">April 6, 2025 — Bern</p>
-          <p className="show-name">Stoner Ritual Night</p>
+      <section
+        id="shows"
+        className="section fade-section max-w-3xl mx-auto px-4"
+      >
+        <h2 className="section-title text-3xl font-bold mb-8 uppercase text-purple-300 tracking-widest">
+          Upcoming Summonings
+        </h2>
+        <div className="w-full">
+          <div className="show-card max-w-xl mx-auto">
+            <p className="show-date">April 6, 2025 — Bern</p>
+            <p className="show-name">Stoner Ritual Night</p>
+          </div>
+          <div className="show-card max-w-xl mx-auto">
+            <p className="show-date">May 17, 2025 — Zürich</p>
+            <p className="show-name">Inferno Fest</p>
+          </div>
         </div>
       </section>
-
-      <section id="media" className="section fade-section">
-        <h2 className="section-title">MEDIA</h2>
-        <div className="gallery">
-          <img src="/gallery1.jpg" />
-          <img src="/gallery2.jpg" />
-          <img src="/gallery3.jpg" />
+      <section
+        id="music"
+        className="section fade-section max-w-5xl mx-auto px-4"
+      >
+        <h2 className="section-title text-3xl font-bold mb-8 uppercase text-purple-300 tracking-widest">
+          The Sound of Void
+        </h2>
+        <div className="w-full max-w-2xl mx-auto">
+          <iframe
+            className="music-embed w-full border-2 border-gray-700 shadow-xl"
+            src="https://open.spotify.com/embed/artist/3BmG8pTz6PvxI6fN5EZe7C"
+            width="100%"
+            height="380"
+            frameBorder="0"
+            allowFullScreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
         </div>
       </section>
-
-      <footer className="footer">© 2025 Cable Pullers</footer>
+      <section
+        id="media"
+        className="section fade-section max-w-5xl mx-auto px-4"
+      >
+        <h2 className="section-title text-3xl font-bold mb-8 uppercase text-purple-300 tracking-widest">
+          Gallery of Damnation
+        </h2>
+        <div className="gallery px-4">
+          <img src="/gallery1.jpg" alt="Gallery Image 1" />
+          <img src="/gallery2.jpg" alt="Gallery Image 2" />
+          <img src="/gallery3.jpg" alt="Gallery Image 3" />
+        </div>
+      </section>
+      {/* FOOTER ENTFERNT (Jetzt in App.jsx) */}
     </div>
   );
 }

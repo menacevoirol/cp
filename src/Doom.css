@@ -1,27 +1,95 @@
-@import "tailwindcss";
-
-/* ========================================= */
-/* GLOBAL */
-/* ========================================= */
-
 html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   background: #050506;
   color: #e6e6e6;
   font-family: "IM Fell English SCl Decorative", serif;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 
 .site-wrapper {
   position: relative;
-  padding-top: 100vh; /* <-- Das ist der Platz für den fixen Hero */
+  /* WICHTIG: Padding auf 80px reduziert */
+  padding-top: 80px;
   z-index: 2;
 }
 
+/* NEU: Klasse für Seiten, die den Fullscreen-Hero benötigen */
+.site-wrapper.has-hero {
+  padding-top: 100vh;
+}
+
+/* Cinematic Dark Hintergrund & Vignette (bleibt gleich) */
+.page-bg {
+  background: radial-gradient(
+      circle at top,
+      rgba(148, 27, 255, 0.22),
+      transparent 60%
+    ),
+    radial-gradient(circle at bottom, rgba(8, 47, 73, 0.75), transparent 55%),
+    radial-gradient(circle at center, #020617, #000000 70%);
+  filter: saturate(1.15);
+  animation: bg-move 16s ease-in-out infinite alternate;
+}
+
+@keyframes bg-move {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+/* Fade-In (bleibt gleich) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1.2s ease forwards;
+}
+
+/* Hard Shake (bleibt gleich) */
+.shake-hard {
+  animation: shakeHard 0.4s ease-in-out infinite;
+}
+
+@keyframes shakeHard {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-12px, 8px);
+  }
+  40% {
+    transform: translate(14px, -10px);
+  }
+  60% {
+    transform: translate(-10px, 5px);
+  }
+  80% {
+    transform: translate(6px, -3px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
 /* ========================================= */
-/* HEADER */
+/* HEADER (bleibt gleich) */
 /* ========================================= */
 
 .mega-header {
@@ -34,7 +102,7 @@ body {
   padding: 20px 50px;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   background: rgba(0, 0, 0, 0.25);
@@ -58,7 +126,8 @@ body {
   gap: 40px;
 }
 
-.mega-nav a {
+.mega-nav a,
+.mega-nav a:visited {
   font-family: "Cinzel Decorative", sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
@@ -68,11 +137,67 @@ body {
   color: #e5e5e5;
   opacity: 0.75;
   transition: 0.25s;
+  text-decoration: none;
 }
 
 .mega-nav a:hover {
   opacity: 1;
   color: #c084fc;
+}
+
+/* ========================================= */
+/* HERO Content Animation */
+/* ========================================= */
+@keyframes doomPulse {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* ========================================= */
+/* SCROLL HINT (FIXED ZENTRIERUNG) */
+/* ========================================= */
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+
+  /* NEUER ZENTRIERUNGS-FIX: Container auf 100% spannen */
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: none; /* Stellt sicher, dass keine ungewollte Transform-Eigenschaft stört */
+
+  text-align: center; /* ZENTRIERT den Inhalt des Containers */
+  color: #c084fc;
+  opacity: 0.8;
+  font-family: "Cinzel Decorative", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  animation: fadeIn 3s ease forwards;
+  pointer-events: none;
+}
+
+.scroll-arrow {
+  font-size: 2rem;
+  margin-top: 10px;
+  color: #e9d5ff;
+  animation: scrollBounce 1.5s infinite;
+}
+
+@keyframes scrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 /* ========================================= */
@@ -88,7 +213,7 @@ body {
   z-index: 1;
 
   background-color: #101014;
-  pointer-events: none; /* NICHT klickbar */
+  pointer-events: none;
 }
 
 .hero-svg-wrapper {
@@ -123,7 +248,7 @@ body {
   z-index: 3;
   text-align: center;
   transition: opacity 0.45s ease, transform 0.45s ease;
-  opacity: 5%;
+  opacity: 1;
 }
 
 .hero-content.hidden {
@@ -141,8 +266,8 @@ body {
   text-shadow: 0 0 18px rgba(160, 70, 255, 0.45),
     0 0 40px rgba(120, 0, 160, 0.35);
 
-  animation: heroReveal 2.4s ease forwards;
-  opacity: 0;
+  opacity: 1;
+  animation: doomPulse 4s infinite ease-in-out alternate;
 }
 
 .hero-sub {
@@ -156,8 +281,7 @@ body {
   color: #d8cfff;
   text-shadow: 0 0 8px rgba(140, 60, 255, 0.3);
 
-  animation: heroReveal 2.8s ease forwards;
-  opacity: 0;
+  opacity: 0.75;
 }
 
 @keyframes heroReveal {
@@ -172,17 +296,17 @@ body {
 }
 
 /* ========================================= */
-/* SECTIONS — NORMAL SCROLL */
+/* SECTIONS – NORMAL SCROLL */
 /* ========================================= */
 
 .section {
-  min-height: 100vh; /* NICHT FIXED */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  padding-top: 80px; /* Platz wegen Header */
+  padding-top: 80px;
   position: relative;
   z-index: 5;
 
@@ -194,92 +318,4 @@ body {
 .section.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* ========================================= */
-/* SHOW CARDS */
-/* ========================================= */
-
-.show-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 28px;
-  margin: 30px 0;
-  border-radius: 10px;
-
-  transition: 0.3s ease;
-  backdrop-filter: blur(6px);
-}
-
-.show-card:hover {
-  border-color: #c084fc;
-  box-shadow: 0 0 18px rgba(160, 70, 255, 0.25);
-}
-
-.show-date {
-  opacity: 0.6;
-  font-size: 0.85rem;
-  letter-spacing: 0.15em;
-  margin-bottom: 6px;
-}
-
-.show-name {
-  font-size: 1.35rem;
-  font-weight: 700;
-}
-
-/* ========================================= */
-/* GALLERY */
-/* ========================================= */
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-
-  border-radius: 8px;
-  filter: brightness(0.8);
-  transition: 0.3s ease;
-}
-
-.gallery img:hover {
-  filter: brightness(1.12) contrast(1.1);
-  transform: scale(1.04);
-}
-
-/* ========================================= */
-/* FOOTER */
-/* ========================================= */
-
-.footer {
-  text-align: center;
-  padding: 50px 0;
-  opacity: 0.4;
-  letter-spacing: 0.25em;
-  font-size: 0.85rem;
-}
-
-/* ========================================= */
-/* MOBILE */
-/* ========================================= */
-
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 3rem;
-  }
-  .mega-header {
-    padding: 14px 20px;
-  }
-  .mega-nav {
-    gap: 20px;
-  }
-  .mega-nav a {
-    font-size: 0.7rem;
-  }
 }
