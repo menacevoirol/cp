@@ -1,3 +1,9 @@
+@import "tailwindcss";
+
+/* ========================================= */
+/* GLOBAL */
+/* ========================================= */
+
 html,
 body {
   height: 100%;
@@ -89,7 +95,7 @@ body {
 }
 
 /* ========================================= */
-/* HEADER (bleibt gleich) */
+/* HEADER */
 /* ========================================= */
 
 .mega-header {
@@ -110,6 +116,7 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Logo und Navigations-Wrapper */
 .mega-center {
   display: flex;
   align-items: center;
@@ -161,19 +168,19 @@ body {
 }
 
 /* ========================================= */
-/* SCROLL HINT (FIXED ZENTRIERUNG) */
+/* SCROLL HINT (Zentrierung beibehalten) */
 /* ========================================= */
 .scroll-hint {
   position: absolute;
   bottom: 40px;
 
-  /* NEUER ZENTRIERUNGS-FIX: Container auf 100% spannen */
+  /* Robusteste Zentrierung für absolute Elemente */
   left: 0;
   right: 0;
   width: 100%;
-  transform: none; /* Stellt sicher, dass keine ungewollte Transform-Eigenschaft stört */
+  transform: none;
 
-  text-align: center; /* ZENTRIERT den Inhalt des Containers */
+  text-align: center;
   color: #c084fc;
   opacity: 0.8;
   font-family: "Cinzel Decorative", sans-serif;
@@ -318,4 +325,137 @@ body {
 .section.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ========================================= */
+/* SHOW CARDS */
+/* ========================================= */
+
+.show-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 28px;
+  margin: 30px 0;
+  border-radius: 10px;
+
+  transition: 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+
+.show-card:hover {
+  border-color: #c084fc;
+  box-shadow: 0 0 18px rgba(160, 70, 255, 0.25);
+}
+
+.show-date {
+  opacity: 0.6;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+
+.show-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+/* ========================================= */
+/* GALLERY */
+/* ========================================= */
+
+.gallery {
+  display: grid;
+  /* Dies ist bereits responsiv, wechselt zu einer Spalte, wenn 260px nicht passt */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+
+  border-radius: 8px;
+  filter: brightness(0.8);
+  transition: 0.3s ease;
+}
+
+.gallery img:hover {
+  filter: brightness(1.12) contrast(1.1);
+  transform: scale(1.04);
+}
+
+/* ========================================= */
+/* FOOTER */
+/* ========================================= */
+
+.footer {
+  text-align: center;
+  padding: 50px 0;
+  opacity: 0.4;
+  letter-spacing: 0.25em;
+  font-size: 0.85rem;
+}
+
+/* ========================================= */
+/* MOBILE (Max-width 768px) */
+/* ========================================= */
+
+@media (max-width: 768px) {
+  /* HEADER: Passt die Navigation an, um zu stapeln und zu zentrieren */
+  .mega-header {
+    padding: 14px 10px; /* Reduziertes Padding */
+  }
+
+  .mega-center {
+    flex-direction: column; /* Stapelt Navigationsgruppen und Logo */
+    gap: 10px;
+    width: 100%;
+  }
+
+  .mega-sigil {
+    height: 40px; /* Kleineres Logo */
+    order: -1; /* Platziert das Logo ganz oben im Stapel */
+  }
+
+  .mega-nav {
+    width: 100%; /* Spannen Sie den gesamten verfügbaren Platz aus */
+    justify-content: center; /* Zentriert die Links innerhalb des Nav-Containers */
+    gap: 15px;
+    flex-wrap: wrap; /* Erlaubt das Umbrechen der Links auf eine zweite Zeile */
+  }
+
+  .mega-nav a,
+  .mega-nav a:visited {
+    font-size: 0.6rem; /* Sehr kleine Schriftgröße */
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+  }
+
+  /* HERO */
+  .hero-title {
+    font-size: 2.2rem; /* Deutlich kleinerer Titel */
+    letter-spacing: 0.1em;
+  }
+
+  .hero-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hero-svg {
+    width: 95%; /* SVG etwas breiter, um den Bildschirm besser zu füllen */
+  }
+
+  /* SECTIONS */
+  .section {
+    min-height: 80vh; /* Sections können kürzer sein */
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  /* GALLERY: Erlaubt automatische Höhe, falls das Bild nicht quadratisch ist */
+  .gallery img {
+    height: auto;
+  }
 }
