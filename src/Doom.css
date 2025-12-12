@@ -42,16 +42,14 @@ body {
   left: 0;
   width: 100%;
   z-index: 80;
-
   padding: 20px 50px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background: rgba(0, 0, 0, 0.596);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  top: 0;
 }
 
 /* Logo und Navigations-Wrapper */
