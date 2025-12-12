@@ -17,6 +17,9 @@ body {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
+.section-text text-lg leading-relaxed text-gray-400 {
+  font-size: 40000px;
+}
 
 .site-wrapper {
   position: relative;
@@ -30,77 +33,13 @@ body {
   padding-top: 100vh;
 }
 
-/* Cinematic Dark Hintergrund & Vignette (bleibt gleich) */
-.page-bg {
-  background: radial-gradient(
-      circle at top,
-      rgba(148, 27, 255, 0.22),
-      transparent 60%
-    ),
-    radial-gradient(circle at bottom, rgba(8, 47, 73, 0.75), transparent 55%),
-    radial-gradient(circle at center, #020617, #000000 70%);
-  filter: saturate(1.15);
-  animation: bg-move 16s ease-in-out infinite alternate;
-}
-
-@keyframes bg-move {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(0, -10px, 0);
-  }
-}
-
-/* Fade-In (bleibt gleich) */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 1.2s ease forwards;
-}
-
-/* Hard Shake (bleibt gleich) */
-.shake-hard {
-  animation: shakeHard 0.4s ease-in-out infinite;
-}
-
-@keyframes shakeHard {
-  0% {
-    transform: translate(0, 0);
-  }
-  20% {
-    transform: translate(-12px, 8px);
-  }
-  40% {
-    transform: translate(14px, -10px);
-  }
-  60% {
-    transform: translate(-10px, 5px);
-  }
-  80% {
-    transform: translate(6px, -3px);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
 /* ========================================= */
 /* HEADER */
 /* ========================================= */
 
 .mega-header {
   position: fixed;
-  top: 0;
+  top: 10;
   left: 0;
   width: 100%;
   z-index: 80;
@@ -111,7 +50,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.596);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -124,7 +63,7 @@ body {
 }
 
 .mega-sigil {
-  height: 64px;
+  height: 100px;
   filter: drop-shadow(0 0 14px rgba(150, 60, 255, 0.55));
 }
 
@@ -149,22 +88,7 @@ body {
 
 .mega-nav a:hover {
   opacity: 1;
-  color: #c084fc;
-}
-
-/* ========================================= */
-/* HERO Content Animation */
-/* ========================================= */
-@keyframes doomPulse {
-  0% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.2);
-  }
-  100% {
-    filter: brightness(1);
-  }
+  color: #734ca0;
 }
 
 /* ========================================= */
@@ -219,7 +143,7 @@ body {
   overflow: hidden;
   z-index: 1;
 
-  background-color: #101014;
+  background-color: #8f8f8f;
   pointer-events: none;
 }
 
@@ -391,10 +315,12 @@ body {
 
 .footer {
   text-align: center;
-  padding: 50px 0;
-  opacity: 0.4;
+  padding: 50px 50px;
+  opacity: 1;
   letter-spacing: 0.25em;
-  font-size: 0.85rem;
+  font-size: 3rem;
+  background-color: #050506;
+  z-index: 9999;
 }
 
 /* ========================================= */
@@ -414,14 +340,14 @@ body {
   }
 
   .mega-sigil {
-    height: 40px; /* Kleineres Logo */
+    height: 60px; /* Kleineres Logo */
     order: -1; /* Platziert das Logo ganz oben im Stapel */
   }
 
   .mega-nav {
     width: 100%; /* Spannen Sie den gesamten verfügbaren Platz aus */
     justify-content: center; /* Zentriert die Links innerhalb des Nav-Containers */
-    gap: 15px;
+    gap: 5px;
     flex-wrap: wrap; /* Erlaubt das Umbrechen der Links auf eine zweite Zeile */
   }
 
