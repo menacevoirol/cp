@@ -165,9 +165,9 @@ body {
   transform: translate(-50%, -50%);
 
   width: 60%;
-  height: auto;
+  height: 90%;
 
-  opacity: 0.45;
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -176,7 +176,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 5;
   text-align: center;
   transition: opacity 0.45s ease, transform 0.45s ease;
   opacity: 1;
@@ -318,9 +318,9 @@ body {
   padding: 50px 50px;
   opacity: 1;
   letter-spacing: 0.25em;
-  font-size: 3rem;
+  font-size: 10rem;
   background-color: #050506;
-  z-index: 9999;
+  z-index: 55;
 }
 
 /* ========================================= */
