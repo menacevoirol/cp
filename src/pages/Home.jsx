@@ -104,6 +104,10 @@ export default function Home() {
           <img src="/gallery3.jpg" alt="Gallery Image 3" />
         </div>
       </section>
+      {/* FOOTER WIRD FIXED AM UNTEREN RAND POSITIONIERT */}
+      <footer className="fixed-doom-footer">
+        <p>© {new Date().getFullYear()} Cable Pullers. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 }

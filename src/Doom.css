@@ -307,22 +307,38 @@ body {
 }
 
 /* ========================================= */
-/* FOOTER */
+/* FOOTER (FIXED) */
 /* ========================================= */
 
-.footer {
-  /* Setzt die neue, volle Breite und zentriert den Inhalt (Text) */
-  width: 100%;
-  text-align: center;
-  padding: 20rem;
-  opacity: 1;
-  letter-spacing: 0.25em;
-  font-size: rem;
-  background-color: #ffffff;
-  z-index: 55;
+/* ========================================= */
+/* FOOTER (FIXED) */
+/* ========================================= */
 
-  /* display: flex; (vom Benutzer gewünscht) entfernt, um text-align: center zu ermöglichen */
-  /* Die Eigenschaft display: flex ist für eine einzelne Textzeile hier unnötig und verhindert die Zentrierung per text-align. */
+.fixed-doom-footer {
+  /* Positionierung und Größe */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+
+  /* Text und Layout */
+  display: flex; /* NEU: Aktivieren von Flex für bessere Anordnung */
+  justify-content: center; /* NEU: Zentriert den Inhalt */
+  align-items: center; /* NEU: Vertikale Zentrierung */
+  padding: 14px 2rem; /* Leicht reduziertes Padding */
+  text-transform: uppercase;
+
+  /* Visuelle Stile */
+  background-color: rgba(0, 0, 0, 0.7); /* Transparenter dunkler Hintergrund */
+  backdrop-filter: blur(8px); /* Stärkerer Blur-Effekt */
+  border-top: 1px solid rgba(255, 255, 255, 0.05); /* NEU: Subtile Trennlinie oben */
+
+  /* Text Styling */
+  font-family: "Cinzel Decorative", sans-serif; /* Passende Schriftart */
+  letter-spacing: 0.2em; /* Etwas weniger Abstand */
+  font-size: 0.9rem;
+  color: #f1d8d8; /* Lila Akzentfarbe, passend zu den Section-Headings */
 }
 
 /* ========================================= */

@@ -1,10 +1,11 @@
 import { Outlet, Link } from "react-router-dom";
-import BackgroundEffects from "./components/BackgroundEffects";
+// import BackgroundEffects from "./components/BackgroundEffects"; // Import entfernt
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden">
-      <BackgroundEffects />
+    // Die Klasse "overflow-hidden" wurde entfernt
+    <div className="relative min-h-screen bg-black">
+      {/* BackgroundEffects wurde entfernt */}
 
       {/* GLOBAL HEADER */}
       <nav className="mega-header">
